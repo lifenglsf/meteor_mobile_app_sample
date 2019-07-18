@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { customers } from '../../../../../imports/collections/customer';
-import { Meteor } from 'meteor/meteor';
+import {MeteorObservable} from 'meteor-rxjs';
 @Component({
   selector: 'app-customers-list',
-  templateUrl: './customers-list.component.html',
-  styleUrls: ['./customers-list.component.scss','../../../../public/scss/bootstrap.scss'],
+  templateUrl: 'customers-list.component.html',
+  styleUrls: ['customers-list.component.scss','../../../../public/scss/bootstrap.scss'],
 })
 
 
@@ -21,41 +21,24 @@ export class CustomersListComponent implements OnInit {
   }
   
   ngOnInit() {
-    //console.log(this.customerList);
-    //this.customerList = Session.get('customerList');
+    MeteorObservable.subscribe('abc').subscribe(() => {
+    this.getCustomerList();
+    console.log(this.customerList);
+    });
     
   }
   toAddCustomer(){
-      this.router.navigateByUrl('/tabs/customer/add');
+      this.router.navigateByUrl('/tabs/customers/add');
   }
-  setCustomerList(customer){
-    console.log(customer,"customerrrrrrrrrrr");
-    this.customerList = customer;
-  }
-   callWithPromise = (method, myParameters) => {
-    return new Promise((resolve, reject) => {
-      Meteor.call(method, myParameters, (err, res) => {
-        if (err) reject(err);
-        resolve(res);
-      });
-    });
-  }
-  callSubscribeWithPromise = (method, myParameters) => {
-    return new Promise((resolve, reject) => {
-      Meteor.subscribe(method, myParameters, function(){
-        resolve(true)
-      });
-    });
-  }
-  
+
    loadPage(page){
     this.page=page
     this.getCustomerList();
   }
-  async getCustomerList(){
+   getCustomerList(){
     const skip = (this.page-1)*this.pageSize
-    await this.callSubscribeWithPromise('customer.customerList',{page:this.page,limit:this.pageSize});
-    this.customerList = customers.find({},{skip:skip,limit:this.pageSize,transform:function(obj){
+    
+    var tmpobj = customers.find({},{skip:skip,limit:this.pageSize,transform:function(obj){
       if(obj.frequency==1){
         obj.frequencyConvert = '每月';
       }else if(obj.frequency==3){
@@ -66,7 +49,6 @@ export class CustomersListComponent implements OnInit {
         obj.frequencyConvert = '每年';
       }
       
-      console.log(this);
       obj.buildNextPayTime=(feeDate,rate)=>{
         var now = new Date();
         var nowYear = now.getFullYear();
@@ -75,7 +57,6 @@ export class CustomersListComponent implements OnInit {
         var registerMonth = feeDate.month;
         var registerYear = feeDate.year;
         var nextMonth;
-            console.log(feeDate,nowMonth,registerMonth,nowMonth-registerMonth);
             if(nowMonth>=registerMonth){
               var interval = nowMonth-registerMonth;
             
@@ -87,7 +68,6 @@ export class CustomersListComponent implements OnInit {
               mod=parseInt(rate);
             }
             nextMonth = nowMonth+mod;
-            console.log(nowMonth);
             if(nextMonth>12){
               nextMonth = nextMonth%12;
               
@@ -104,9 +84,14 @@ export class CustomersListComponent implements OnInit {
       obj.nextPay = obj.buildNextPayTime(obj.fee_date,obj.frequency);
       
       return obj;
-    }}).fetch();
-    console.log(this.customerList);
-    this.collectionSize= await this.callWithPromise('countCustomer',[]);   
+    }})
+    this.customerList=tmpobj.fetch();
+    var cusor = customers.find();
+    this.collectionSize= cusor.collectionCount();   
+    this.collectionSize.subscribe((list)=>{
+      this.collectionSize = list;
+    })
+    cusor.subscribe()
   }
 
   

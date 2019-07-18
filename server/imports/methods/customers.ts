@@ -12,11 +12,7 @@ Meteor.methods({
             return customers.find({},{skip:skip,limit:obj.limit}).fetch();
         //}
       
-    },
-
-    async countCustomer(){
-        const count = customers.find().count();
-        console.log(count);
-        return count;
     }
+
+   
 });

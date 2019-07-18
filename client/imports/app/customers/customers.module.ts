@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomersPage } from './customers.page';
 import {CustomersAddComponent} from './customers-add/customers-add.component';
 import {CustomersListComponent} from './customers-list/customers-list.component';
 import { NgbDate, NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';

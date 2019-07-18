@@ -21,6 +21,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.2.1",
     "bootstrap": "^4.3.1",
     "core-js": "2.5.7",
+    "ionic-angular": "^3.9.8",
     "lodash": "^4.17.14",
     "meteor-node-stubs": "0.4.1",
     "meteor-rxjs": "0.4.14",

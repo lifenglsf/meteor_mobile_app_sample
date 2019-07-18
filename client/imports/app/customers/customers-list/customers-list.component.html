@@ -1,12 +1,6 @@
-<!--<ion-header>
-    <ion-toolbar>
-        <ion-title>
-            customers-list
-        </ion-title>
-      </ion-toolbar>
-  </ion-header>
-<ion-content>
-    <ion-button color="primary" (click)="toAddCustomer()">添加</ion-button>
+
+<div class="content">
+    <button class="btn btn-primary" (click)="toAddCustomer()">添加</button>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -18,7 +12,7 @@
     <tbody>
         <tr *ngFor="let country of customerList;">
             <td>
-              {{ country.name }}
+              {{ country.company }}
             </td>
             <td>
               {{country.frequencyConvert}}
@@ -32,6 +26,5 @@
     </ngb-pagination>
 
   </div>
-</ion-content>
--->
+</div>
 customer list
