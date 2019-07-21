@@ -28,7 +28,7 @@ export class CustomersListComponent implements OnInit {
     
   }
   toAddCustomer(){
-      this.router.navigateByUrl('/tabs/customers/add');
+      this.router.navigateByUrl('/customers/add');
   }
 
    loadPage(page){

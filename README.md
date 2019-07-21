@@ -1,3 +1,5 @@
+before meteor build or meteor run android
+export AOT=0
 # Angular-Meteor Boilerplate
 
 ## Usage
