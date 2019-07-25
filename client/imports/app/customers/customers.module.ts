@@ -6,6 +6,7 @@ import {CustomersAddComponent} from './customers-add/customers-add.component';
 import {CustomersListComponent} from './customers-list/customers-list.component';
 import { NgbDate, NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import {NgbDateMMDDParserFormatter} from '../date.provider/format.provider';
+import {IonicModule} from 'ionic-angular';
 const routes: Routes = [
   {
     path: '',
@@ -23,7 +24,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     NgbModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicModule
   ],
   declarations: [CustomersAddComponent,CustomersListComponent],
   providers:[{provide:NgbDateParserFormatter,useClass:NgbDateMMDDParserFormatter}]

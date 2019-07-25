@@ -1,7 +1,7 @@
 import {Routes,RouterModule} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
-
+import {IonicModule} from 'ionic-angular';
 
 const routes:Routes = [
   { path: 'todoAdd',loadChildren: () => import('./todo-add/todo-add.module').then(m => m.TodoAddModule)},
@@ -15,7 +15,7 @@ const routes:Routes = [
   { path: '**', component: PageNotFoundComponent }
 ]
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),IonicModule],
   exports: [RouterModule],
   declarations:[PageNotFoundComponent]
 

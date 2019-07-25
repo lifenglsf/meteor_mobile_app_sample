@@ -1,2 +1,14 @@
 // Theme
 @import "imports/app/theme/variables.scss";
+@import "../node_modules/ionic-angular/themes/ionic.globals.scss";
+@import "../node_modules/ionic-angular/themes/ionic.theme.default.scss";
+@import "../node_modules/ionicons/dist/scss/ionicons.scss";
+@import "../node_modules/ionic-angular/components/alert/alert.scss";
+@import "../node_modules/ionic-angular/components/alert/alert.md.scss";
+@import "../node_modules/ionic-angular/components/alert/alert.ios.scss";
+.navbar{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color:#d6e6f5
+}

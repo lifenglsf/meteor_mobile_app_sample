@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Meteor } from 'meteor/meteor';
 import {DialogErrorComponent} from '../../dialog/dialog.error.component';
 import {DialogSuccessComponent} from '../../dialog/dialog.success.component';
 import { MatDialog } from '@angular/material';  
 import * as _ from 'lodash';
+import { AlertController, NavController, App } from 'ionic-angular';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'ngbd-datepicker',
   templateUrl: './customers-add.component.html',
   styleUrls: ['./customers-add.component.scss'],
 })
+@Injectable()
 export class CustomersAddComponent implements OnInit {
   customer = {};
-  constructor(public dialog:MatDialog) {
+  constructor(public dialog:MatDialog,public alertController:AlertController,private route:Router) {
     console.log(this);
    }
    callWithPromise = (method, myParameters) => {
@@ -28,11 +32,38 @@ export class CustomersAddComponent implements OnInit {
     try {
       const res = await this.callWithPromise('addCustomer',this.customer);
       console.log(res);
+      let alert;
       if(_.has(res,'error')){
-        this.dialog.open(DialogErrorComponent,{width:"800px",data:{message:_.get(res,'message')}})
+         alert =this.alertController.create({
+          title:"添加结果",
+          subTitle:_.get(res,'message'),
+          buttons:['OK']
+        })
+        //this.dialog.open(DialogErrorComponent,{width:"800px",data:{message:_.get(res,'message')}})
       }else{
-        this.dialog.open(DialogSuccessComponent)
+         alert =this.alertController.create(
+         {
+          title:"添加结果",
+          subTitle:"成功",
+          buttons:[
+            {
+            text:"继续添加",
+            handler:()=>{
+                this.customer=null;
+            }
+          },
+          {
+            text:"去列表",
+            handler:()=>{
+              this.route.navigateByUrl('/customers')
+            }
+          }
+        ]
+        })
+        //this.dialog.open(DialogSuccessComponent)
       }
+      alert.present()
+
     } catch (error) {
       console.log(error);
     }
