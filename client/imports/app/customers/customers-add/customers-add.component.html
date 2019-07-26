@@ -31,6 +31,8 @@
               <label class="col-form-label col-sm-2">Description</label>
               <textarea [(ngModel)]="customer.description" placeholder="其他描述" name="description" class="form-control col-sm-10"></textarea>
           </div>
+         
+          <ion-input type="text" hidden [(ngModel)]="customer._id" ></ion-input>
           <div class="form-group row">
               <button  type="submit" class="btn btn-primary">Add Todo</button>
           </div>

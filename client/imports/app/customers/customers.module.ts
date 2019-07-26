@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import {CustomersAddComponent} from './customers-add/customers-add.component';
 import {CustomersListComponent} from './customers-list/customers-list.component';
-import { NgbDate, NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import {NgbDateMMDDParserFormatter} from '../date.provider/format.provider';
 import {IonicModule} from 'ionic-angular';
+import { CustomersEditComponnet } from './customers-edit/customers-edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: CustomersAddComponent
+  },
+  {
+    path:'edit/:id',
+    component:CustomersEditComponnet
   }
 
 ];
@@ -27,7 +32,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicModule
   ],
-  declarations: [CustomersAddComponent,CustomersListComponent],
-  providers:[{provide:NgbDateParserFormatter,useClass:NgbDateMMDDParserFormatter}]
+  declarations: [CustomersAddComponent,CustomersListComponent,CustomersEditComponnet],
+  providers:[
+    {provide:NgbDateParserFormatter,useClass:NgbDateMMDDParserFormatter}
+  ]
 })
 export class CustomersPageModule {}

@@ -10,6 +10,8 @@
           <th scope="col">姓名</th>
           <th scope="col">频率</th>
           <th scope="col">下次缴费日期</th>
+
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +23,7 @@
             {{country.frequencyConvert}}
           </td>
           <td>{{ country.nextPay }}</td>
+          <td><a [routerLink]="['/customers/edit',country._id]">编辑</a></td>
         </tr>
       </tbody>
     </table>
