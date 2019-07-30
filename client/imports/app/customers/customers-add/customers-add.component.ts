@@ -6,15 +6,15 @@ import { AlertController, NavController, App } from 'ionic-angular';
 import { Router } from '@angular/router';
 import { CustomerCommon } from '../customer.common';
 import { CustomerService } from 'client/imports/service/customerService';
-
 @Component({
   selector: 'ngbd-datepicker',
   templateUrl: './customers-add.component.html',
   styleUrls: ['./customers-add.component.scss'],
+  providers:[CustomerCommon,CustomerService]
 })
 @Injectable()
 export class CustomersAddComponent implements OnInit {
-  customer = {};
+  customer ={};
   constructor(public dialog:MatDialog,public alertController:AlertController,private route:Router,public customerService:CustomerService,public customerCommon:CustomerCommon) {
     console.log(this);
    }
@@ -27,9 +27,9 @@ export class CustomersAddComponent implements OnInit {
     });
   }
   ngOnInit() {}
+  
   async addCustomer(){
-    console.log(this.customer);
-    try {
+  try {
       const res = await this.customerService.addCustomer(this.customer)
       this.customerCommon.addCustomerPopup(res,this.alertController,this.route)
 

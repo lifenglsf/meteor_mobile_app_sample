@@ -12,3 +12,16 @@
     width: 100%;
     background-color:#d6e6f5
 }
+.form-control.is-valid, .was-validated .custom-select:valid, .was-validated .form-control:valid, .ng-valid[required],.ng-invalid.required{
+    border-color: #28a745;
+}
+.form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid, .ng-invalid:not(form){
+    border-color: #dc3545;
+}
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}

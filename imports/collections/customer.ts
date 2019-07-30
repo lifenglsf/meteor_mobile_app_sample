@@ -1,3 +1,3 @@
-import { MongoObservable } from 'meteor-rxjs';
+import { Mongo } from 'meteor/mongo';
 
-export const customers = new MongoObservable.Collection('customers');
+export const customers = new Mongo.Collection('customers');
