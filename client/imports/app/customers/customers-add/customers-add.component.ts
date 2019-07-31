@@ -16,7 +16,6 @@ import { CustomerService } from 'client/imports/service/customerService';
 export class CustomersAddComponent implements OnInit {
   customer ={};
   constructor(public dialog:MatDialog,public alertController:AlertController,private route:Router,public customerService:CustomerService,public customerCommon:CustomerCommon) {
-    console.log(this);
    }
    callWithPromise = (method, myParameters) => {
     return new Promise((resolve, reject) => {
@@ -30,11 +29,11 @@ export class CustomersAddComponent implements OnInit {
   
   async addCustomer(){
   try {
+      _.set(this.customer,'manager',Meteor.userId());
       const res = await this.customerService.addCustomer(this.customer)
       this.customerCommon.addCustomerPopup(res,this.alertController,this.route)
 
     } catch (error) {
-      console.log(error);
     }
   
   }

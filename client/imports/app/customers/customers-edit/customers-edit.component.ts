@@ -18,7 +18,6 @@ export class CustomersEditComponnet implements OnInit {
         MeteorObservable.subscribe('abc').subscribe(() => {
             const data = this.router.snapshot.params
             this.customer = this.findCustomer(_.get(data, 'id'));
-            console.log(this.customer);
         });
     }
     findCustomer(id) {
@@ -30,7 +29,6 @@ export class CustomersEditComponnet implements OnInit {
             this.customerCommon.addCustomerPopup(res, this.alertController, this.route)
 
         } catch (error) {
-            console.log(error);
         }
 
     }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Accounts } from 'meteor/accounts-base';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
 import { CustomerService } from 'client/imports/service/customerService';
@@ -37,9 +36,6 @@ export class Register implements OnInit {
 
     }
     async registerUser() {
-
-        //this.registerForm.markAsPristine();
-        console.log(this.registerForm.value);
         if (this.registerForm.invalid) {
             const alert = this.alertControl.create({
                 title: "注册用户",
@@ -72,17 +68,6 @@ export class Register implements OnInit {
               
 
             }
-            /*Accounts.createUser(this.registerForm.value,(err)=>{
-                if(err){
-                    const alert =this.alertControl.create({
-                        title:"注册用户",
-                        subTitle:"注册失败，失败原因"+err,
-                        buttons:['OK']
-                    })
-                    alert.present()
-                }
-            })*/
-
         }
 
 

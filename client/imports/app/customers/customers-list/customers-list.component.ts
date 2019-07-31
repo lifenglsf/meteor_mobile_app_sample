@@ -24,7 +24,6 @@ export class CustomersListComponent implements OnInit {
     ngOnInit() {
         MeteorObservable.subscribe('abc').subscribe(() => {
             this.getCustomerList();
-            console.log(this.customerList);
         });
 
     }
@@ -41,7 +40,6 @@ export class CustomersListComponent implements OnInit {
 
         var tmpobj = customers.find({}, {
             skip: skip, limit: this.pageSize, transform: function(obj) {
-                console.log(obj);
                 if (_.has(obj, 'fee_date')) {
                     if (obj.frequency == 1) {
                         obj.frequencyConvert = '每月';

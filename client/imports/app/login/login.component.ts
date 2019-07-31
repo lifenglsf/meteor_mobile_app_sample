@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit{
             });
             alert.present();
         }else{
-            this.loginForm.markAsDirty();
             const res = await new Promise((resolve, reject) => {
                 Meteor.loginWithPassword(
                     _.get(formValue,
@@ -66,7 +65,6 @@ export class LoginComponent implements OnInit{
                     buttons:[{
                         text:'ok',
                         handler:()=>{
-                            console.log(this.loginForm.valid)
                             this.router.navigate(['/customers']);
                         }
                     }]
@@ -74,13 +72,7 @@ export class LoginComponent implements OnInit{
                 alert.present();
                
             }
-            /*console.log(this.loginSuccess)
-            if(this.loginSuccess){
-                console.log('before navigate')
-                this.router.navigate(['/customers']);
-            }*/
-            
-            
+          
         }
     }
 }

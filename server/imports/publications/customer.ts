@@ -6,5 +6,5 @@ Meteor.publish('abc',function(){
     var objects = customers.find({},{skip:skip,limit:obj.limit});
     console.log(obj.limit,'limit',skip,'skip','result',objects.fetch());
     return objects;*/
-    return customers.find();
+    return customers.find({manager:this.userId});
 });

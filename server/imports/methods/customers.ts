@@ -15,7 +15,7 @@ Meteor.methods({
     async publishCustomer(obj){
         //if(this.isSimulation){
             var skip = (obj.page-1)*obj.limit;
-            return customers.find({},{skip:skip,limit:obj.limit}).fetch();
+            return customers.find({"manager":this.userId},{skip:skip,limit:obj.limit}).fetch();
         //}
       
     }
