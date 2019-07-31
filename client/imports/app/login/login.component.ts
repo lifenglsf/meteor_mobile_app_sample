@@ -1,12 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController } from 'ionic-angular';
-import { Accounts } from 'meteor/accounts-base';
+import { AlertController, Button } from 'ionic-angular';
 import { Meteor } from 'meteor/meteor';
 import * as _ from 'lodash';
-import { ActivatedRoute, Router, RouterState } from '@angular/router';
+import {  Router } from '@angular/router';
 import { CustomerService } from 'client/imports/service/customerService';
-import { CustomerCommon } from '../customers/customer.common';
 import { __await } from 'tslib';
 @Component({
     templateUrl:"login.component.html",
@@ -19,16 +17,22 @@ export class LoginComponent implements OnInit{
         
     }
     ngOnInit(){
-        this.loginForm = new FormGroup({
-            'username':new FormControl('',[
-                Validators.required
-            ]),
-            'password':new FormControl('',[
-                Validators.required
-            ])
-        });
+        if(Meteor.userId()){
+            this.router.navigateByUrl('/customers');
+        }else{
+            this.loginForm = new FormGroup({
+                'username':new FormControl('',[
+                    Validators.required
+                ]),
+                'password':new FormControl('',[
+                    Validators.required
+                ])
+            });
+        }
+       
     }
     async loginUser(){
+        const formValue = this.loginForm.value;
         if(this.loginForm.invalid){
             const alert = this.alertControl.create({
                 title:"登陆",
@@ -36,17 +40,12 @@ export class LoginComponent implements OnInit{
                 buttons:['OK']
             });
             alert.present();
-            
-            
         }else{
-            /*const res = Meteor.loginWithPassword(_.get(this.loginForm.value,'username'),_.get(this.loginForm.value,'password'),(err)=>{
-               
-               
-            })*/
+            this.loginForm.markAsDirty();
             const res = await new Promise((resolve, reject) => {
                 Meteor.loginWithPassword(
-                    _.get(this.loginForm.value,
-                        'username'),_.get(this.loginForm.value,'password'),
+                    _.get(formValue,
+                        'username'),_.get(formValue,'password'),
                          (err, res) => {
                             if (err) resolve(err)
                                 resolve(res);
@@ -61,8 +60,19 @@ export class LoginComponent implements OnInit{
                 alert.present();
             }else{
                 this.loginForm.reset();
-                console.log('login success')
-                this.router.navigate(['/customers']);
+                const alert = this.alertControl.create({
+                    title:"登陆",
+                    subTitle:"登陆成功",
+                    buttons:[{
+                        text:'ok',
+                        handler:()=>{
+                            console.log(this.loginForm.valid)
+                            this.router.navigate(['/customers']);
+                        }
+                    }]
+                });
+                alert.present();
+               
             }
             /*console.log(this.loginSuccess)
             if(this.loginSuccess){
