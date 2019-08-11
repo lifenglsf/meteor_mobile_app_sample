@@ -60,16 +60,17 @@ export class CustomersListComponent implements OnInit {
                         var registerYear = feeDate.year;
                         var nextMonth;
                         if (nowMonth >= registerMonth) {
-                            var interval = nowMonth - registerMonth;
-
+                            var interval = rate-(nowMonth - registerMonth)%rate;
+                            var mod = interval % rate;
+                            if (mod == 0) {
+                                mod = parseInt(rate);
+                            }
+                            nextMonth = nowMonth + mod;
                         } else {
-                            var nowMonth = nowMonth + 12;
+                             nextMonth = registerMonth + rate;
+                            //var interval = nowMonth;
                         }
-                        var mod = interval % rate;
-                        if (mod == 0) {
-                            mod = parseInt(rate);
-                        }
-                        nextMonth = nowMonth + mod;
+                        
                         if (nextMonth > 12) {
                             nextMonth = nextMonth % 12;
 
