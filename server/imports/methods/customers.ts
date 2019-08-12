@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { customers } from '../../../imports/collections/customer';
 import * as _ from 'lodash'
+import { orders } from 'imports/collections/orders';
 Meteor.methods({
     addCustomer(obj){
         if(_.has(obj,'_id') && _.get(obj,'_id')){
@@ -11,6 +12,13 @@ Meteor.methods({
             return customers.insert(obj);
         }
         
+    },
+    addOrder(obj){
+        return orders.insert(obj);
+        
+    },
+    updateOrder(id,obj){
+        return orders.update({_id:id},obj);
     },
     async publishCustomer(obj){
         //if(this.isSimulation){

@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Title</ion-title>
+    <ion-title>添加客户</ion-title>
   </ion-toolbar>
-  
+  </ion-header>
+  <div class="content">
     <form (ngSubmit)="addCustomer()"  #CustomersAdd="ngForm">
         <div class="form-group row">
           <label class="col-form-label col-sm-2">公司</label>
@@ -39,8 +40,9 @@
          
           <ion-input type="text" hidden [(ngModel)]="customer._id" name="_id"></ion-input>
           <div class="form-group row">
-              <button  type="submit" class="btn btn-primary" [disabled]="!CustomersAdd.form.valid">Add Todo</button>
+              <button  type="submit" class="btn btn-primary" [disabled]="!CustomersAdd.form.valid">添加客户</button>
           </div>
           
     <form>
+      </div>
         

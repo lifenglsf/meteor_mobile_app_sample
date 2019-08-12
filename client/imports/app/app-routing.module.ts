@@ -10,6 +10,8 @@ const routes:Routes = [
   { path: 'todoAdd',loadChildren: () => import('./todo-add/todo-add.module').then(m => m.TodoAddModule)},
   { path: 'todoList',loadChildren: () => import('./todo-list/todo-list.module').then(m => m.TodoListModule)},
   { path: 'customers',loadChildren: () => import('./customers/customers.module').then(m => m.CustomersPageModule),canActivate: [AuthGuard]},
+  { path: 'orders',loadChildren: () => import('./customers/orders/orders.module').then(m => m.OrderssPageModule),canActivate: [AuthGuard]},
+
   {
     path: '',
     redirectTo: '/customers',
