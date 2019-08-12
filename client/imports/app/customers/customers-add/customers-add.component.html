@@ -2,47 +2,48 @@
   <ion-toolbar>
     <ion-title>添加客户</ion-title>
   </ion-toolbar>
-  </ion-header>
-  <div class="content">
-    <form (ngSubmit)="addCustomer()"  #CustomersAdd="ngForm">
-        <div class="form-group row">
-          <label class="col-form-label col-sm-2">公司</label>
-          <div class="col-sm-10">
-            <input type="text" name="company" class="form-control " [(ngModel)]="customer.company" required id="company" #company="ngModel">
-            <div [hidden]="company.valid || company.pristine"
-            class="alert alert-danger">
-         Name is required
-       </div>
-          </div>
+</ion-header>
+<div class="content">
+  <form (ngSubmit)="addCustomer()" #CustomersAdd="ngForm">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">公司</label>
+      <div class="col-sm-10">
+        <input type="text" name="company" class="form-control " [(ngModel)]="customer.company" required id="company"
+          #company="ngModel">
+        <div [hidden]="company.valid || company.pristine" class="alert alert-danger">
+          Name is required
         </div>
-          <div class="form-group row">
-            <label class="col-form-label col-sm-2">缴费日期</label>
-            <div class="col-sm-10">
-              <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker" class="form-control" [(ngModel)]="customer.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-form-label col-sm-2">缴费频率</label>
-            <div class="col-sm-10">
-              <select name="frequency" [(ngModel)]="customer.frequency" class="form-control" required>
-                <option value="">请选择频率</option>
-                <option value="1">每月</option>
-                <option value="3">每季</option>
-                <option value="6">每半年</option>
-                <option value="12">每年</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-              <label class="col-form-label col-sm-2">Description</label>
-              <textarea [(ngModel)]="customer.description" placeholder="其他描述" name="description" class="form-control col-sm-10"></textarea>
-          </div>
-         
-          <ion-input type="text" hidden [(ngModel)]="customer._id" name="_id"></ion-input>
-          <div class="form-group row">
-              <button  type="submit" class="btn btn-primary" [disabled]="!CustomersAdd.form.valid">添加客户</button>
-          </div>
-          
-    <form>
       </div>
-        
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">缴费日期</label>
+      <div class="col-sm-10">
+        <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker"
+          class="form-control" [(ngModel)]="customer.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">缴费频率</label>
+      <div class="col-sm-10">
+        <select name="frequency" [(ngModel)]="customer.frequency" class="form-control" required>
+          <option value="">请选择频率</option>
+          <option value="1">每月</option>
+          <option value="3">每季</option>
+          <option value="6">每半年</option>
+          <option value="12">每年</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">Description</label>
+      <textarea [(ngModel)]="customer.description" placeholder="其他描述" name="description"
+        class="form-control col-sm-10"></textarea>
+    </div>
+
+    <ion-input type="text" hidden [(ngModel)]="customer._id" name="_id"></ion-input>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary" [disabled]="!CustomersAdd.form.valid">添加客户</button>
+    </div>
+
+  </form>
+</div>

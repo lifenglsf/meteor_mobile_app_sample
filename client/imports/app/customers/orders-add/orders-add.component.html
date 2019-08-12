@@ -1,46 +1,46 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title>添加缴费记录</ion-title>
-    </ion-toolbar>
-    </ion-header>
-      <form (ngSubmit)="addOrder()"  #OrdersAdd="ngForm">
-          <div class="form-group row">
-            <label class="col-form-label col-sm-2">公司</label>
-            <div class="col-sm-10">
-                    <select name="company" [(ngModel)]="orders.company" class="form-control" required id="company"  #company="ngModel">
-                        <option *ngFor="let item of companyList" value="{{item._id}}">{{item.company}}</option>
-                    </select>
-              <div [hidden]="company.valid || company.pristine" class="alert alert-danger">
-                公司必选
-              </div>
-            </div>
-          </div>
-            <div class="form-group row">
-              <label class="col-form-label col-sm-2">缴费日期</label>
-              <div class="col-sm-10">
-                <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker" class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-form-label col-sm-2">方式</label>
-              <div class="col-sm-10">
-                <select name="option" [(ngModel)]="orders.option" class="form-control" required>
-                  <option value="">请选择方式</option>
-                  <option value="1">微信</option>
-                  <option value="2">支付宝</option>
-                  <option value="3">现金</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2">Description</label>
-                <textarea [(ngModel)]="orders.description" placeholder="其他描述" name="description" class="form-control col-sm-10"></textarea>
-            </div>
-           
-            <ion-input type="text" hidden [(ngModel)]="orders._id" name="_id"></ion-input>
-            <div class="form-group row">
-                <button  type="submit" class="btn btn-primary" [disabled]="!OrdersAdd.form.valid">添加缴费记录</button>
-            </div>
-            
-      <form>
-          
+  <ion-toolbar>
+    <ion-title>添加缴费记录</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form (ngSubmit)="addOrder()" #OrdersAdd="ngForm">
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">公司</label>
+    <div class="col-sm-10">
+      <select name="company" [(ngModel)]="orders.company" class="form-control" required id="company" #company="ngModel">
+        <option *ngFor="let item of companyList" value="{{item._id}}">{{item.company}}</option>
+      </select>
+      <div [hidden]="company.valid || company.pristine" class="alert alert-danger">
+        公司必选
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">缴费日期</label>
+    <div class="col-sm-10">
+      <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker"
+        class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">方式</label>
+    <div class="col-sm-10">
+      <select name="option" [(ngModel)]="orders.option" class="form-control" required>
+        <option value="">请选择方式</option>
+        <option value="1">微信</option>
+        <option value="2">支付宝</option>
+        <option value="3">现金</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">Description</label>
+    <textarea [(ngModel)]="orders.description" placeholder="其他描述" name="description"
+      class="form-control col-sm-10"></textarea>
+  </div>
+
+  <ion-input type="text" hidden [(ngModel)]="orders._id" name="_id"></ion-input>
+  <div class="form-group row">
+    <button type="submit" class="btn btn-primary" [disabled]="!OrdersAdd.form.valid">添加缴费记录</button>
+  </div>
+</form>
