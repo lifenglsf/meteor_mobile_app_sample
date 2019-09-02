@@ -8,6 +8,10 @@ import { Injectable } from "@angular/core";
     async addOrder(orders){
       return await this.callWithPromise('addOrder',orders);
     }
+
+    async updateOrder(id,orders){
+      return await this.callWithPromise('updateOrder',{id,orders});
+    }
     callWithPromise = (method, myParameters) => {
         return new Promise((resolve, reject) => {
           Meteor.call(method, myParameters, (err, res) => {

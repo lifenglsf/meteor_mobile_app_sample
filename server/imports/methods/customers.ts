@@ -17,7 +17,9 @@ Meteor.methods({
         return orders.insert(obj);
         
     },
-    updateOrder(id,obj){
+    updateOrder(objects){
+        const id = _.get(objects,'id');
+        const obj = _.get(objects,'orders');
         return orders.update({_id:id},obj);
     },
     async publishCustomer(obj){

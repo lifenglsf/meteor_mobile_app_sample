@@ -32,9 +32,9 @@
    <div class="form-group row">
     <label class="col-form-label col-sm-2">发票</label>
     <div class="col-sm-10">
-      <input ng-true-value="1" ng-false-value="0"  type="checkbox" name="fee_invoice" (change)="changeInvoice($event)"
+      <input ng-true-value="1" ng-false-value="0"  type="checkbox" name="fee_invoice" 
         [(ngModel)]="orders.fee_invoice"  autocomplete="off" id="fee_invoice" #fee_invoice="ngModel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input  id="fee_invoice_confirm" type="checkbox" name="fee_invoice_confirm"  [(ngModel)]="orders.fee_invoice_confirm"  autocomplete="off">
+         <input [disabled]="fee_invoice.invalid"   type="checkbox" name="fee_invoice_confirm"  [(ngModel)]="orders.fee_invoice_confirm"  autocomplete="off">
     </div>
   </div>
   <div class="form-group row">

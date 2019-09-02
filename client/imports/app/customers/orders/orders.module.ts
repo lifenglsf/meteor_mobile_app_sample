@@ -6,6 +6,7 @@ import {  NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import {IonicModule} from 'ionic-angular';
 import { OrdersAdd } from '../orders-add/orders-add.component';
 import { OrdersListComponent } from '../orders-list/orders-list.component';
+import { OrdersEdit } from '../orders-edit/orders-edit.component';
 const routes: Routes = [
     {
         path: '',
@@ -15,6 +16,14 @@ const routes: Routes = [
     path: 'add',
     component: OrdersAdd
   },
+  {
+    path:":id",
+    component:OrdersListComponent
+  },
+  {
+    path:"edit/:id",
+    component:OrdersEdit
+  }
   
 
 ];
@@ -27,7 +36,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicModule
   ],
-  declarations: [OrdersAdd,OrdersListComponent],
+  declarations: [OrdersAdd,OrdersListComponent,OrdersEdit],
 
 })
 export class OrderssPageModule {}

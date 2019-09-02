@@ -39,57 +39,7 @@ export class CustomersListComponent implements OnInit {
         const skip = (this.page - 1) * this.pageSize
 
         var tmpobj = customers.find({}, {
-            skip: skip, limit: this.pageSize, transform: function(obj) {
-                if (_.has(obj, 'fee_date')) {
-                    if (obj.frequency == 1) {
-                        obj.frequencyConvert = '每月';
-                    } else if (obj.frequency == 3) {
-                        obj.frequencyConvert = '每季';
-                    } else if (obj.frequency == 6) {
-                        obj.frequencyConvert = '每半年';
-                    } else if (obj.frequency == 12) {
-                        obj.frequencyConvert = '每年';
-                    }
-
-                    obj.buildNextPayTime = (feeDate, rate) => {
-                        var now = new Date();
-                        var nowYear = now.getFullYear();
-                        var nowMonth = now.getMonth() + 1;
-                        var nowDay = now.getDate();
-                        var registerMonth = feeDate.month;
-                        var registerYear = feeDate.year;
-                        var nextMonth;
-                        if (nowMonth >= registerMonth) {
-                            var interval = rate-(nowMonth - registerMonth)%rate;
-                            var mod = interval % rate;
-                            if (mod == 0) {
-                                mod = parseInt(rate);
-                            }
-                            nextMonth = nowMonth + mod;
-                        } else {
-                             nextMonth = registerMonth + rate;
-                            //var interval = nowMonth;
-                        }
-                        
-                        if (nextMonth > 12) {
-                            nextMonth = nextMonth % 12;
-
-                            nowYear += 1;
-                        }
-
-                        if (nextMonth < 10) {
-                            nextMonth = '0' + nextMonth;
-                        }
-                        var next = nowYear + '-' + nextMonth;
-                        return next;
-                    }
-
-                    obj.nextPay = obj.buildNextPayTime(obj.fee_date, obj.frequency);
-                }
-
-
-                return obj;
-            }
+            skip: skip, limit: this.pageSize
         })
         this.customerList = tmpobj.fetch();
         var cusor = customers.find();

@@ -10,20 +10,25 @@
               <th scope="col">公司名</th>
               <th scope="col">缴费时间</th>
               <th scope="col">缴费方式</th>
-    
+              <th scope="col">发票</th>
+              <th scope="col">操作</th>
            
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let order of ordersList;">
               <td>
-                {{ order.company }}
+                {{ order.companyName }}
               </td>
+             
               <td>
                 {{order.convertFeeDate}}
               </td>
               <td>{{ order.convertOption }}</td>
-           
+              <td>
+                {{order.convertInvoice}}
+              </td>
+              <td><a [routerLink]="['/orders/edit',order._id]">编辑</a></td>
             </tr>
           </tbody>
         </table>
