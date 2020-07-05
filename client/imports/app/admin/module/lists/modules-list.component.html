@@ -1,0 +1,37 @@
+<header class="header">
+  <h2>模块列表</h2>
+</header>
+
+<div class="content">
+  <button class="btn btn-primary" (click)="toAddModule()">添加</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">模块名称</th>
+        <th scope="col">模块代码</th>
+        <th scope="col">模块action</th>
+        <!--<th scope="col">操作</th>-->
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let module of moduleList;">
+        <td>
+          {{ module.module_name }}
+        </td>
+       
+        <td>
+          {{module.module_code}}
+        </td>
+        <td>{{ module.module_action }}</td>
+        <!--<td><a [routerLink]="['/admin/module/edit',module._id]">编辑</a></td>-->
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+      (pageChange)="loadPage($event)">
+    </ngb-pagination>
+
+  </div>
+</div>

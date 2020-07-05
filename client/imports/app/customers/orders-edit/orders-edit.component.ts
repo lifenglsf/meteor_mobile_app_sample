@@ -8,14 +8,17 @@ import { AlertController } from 'ionic-angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { orders } from 'imports/collections/orders';
+import { BaseComponnet } from '../../base.component';
 @Component({
     templateUrl:"../orders-add/orders-add.component.html",
     selector:"ng-orders-add",
     providers:[CustomerService,PopUp]
 })
-export class OrdersEdit implements OnInit,OnDestroy{
+export class OrdersEdit  extends BaseComponnet implements OnInit,OnDestroy{
     companyList:any;
     orders={};
+    componentAction="edit";
+    componentModule="orders";
     private meteorSubscription:Subscription ;
     private ordersSubscription:Subscription;
     ngOnInit(){
@@ -35,12 +38,13 @@ export class OrdersEdit implements OnInit,OnDestroy{
            
             console.log(this.orders);
         });
+        this.checkPerm();
     }
     findOrder(id){
         return orders.findOne({_id:id});
     }
     constructor(public customerService:CustomerService,public popup:PopUp,public alertControl:AlertController,public router:Router,public activedRoute:ActivatedRoute){
-
+        super();
     }
     changeInvoice(event){
         const invoiceConfirm = document.getElementById('fee_invoice_confirm');
@@ -61,22 +65,20 @@ export class OrdersEdit implements OnInit,OnDestroy{
             console.log(res);
             let title = '修改缴费记录';
             var subTitle = '修改缴费记录成功';
-            var ok = {},cancel={};
+            let url="";
+            let isError=false;
             if(_.has(res,'error')){
                 subTitle = '修改支付记录失败,失败原因:'+_.get(res,'message');
-                ok = undefined;
-                cancel=undefined;
+                isError=true;
             }else{
-                _.set(ok,'text','继续添加');
-                _.set(ok,'callback',function(){location.reload()});
-                _.set(cancel,'text','去列表');
-                _.set(cancel,'callback',function(){console.log(this);this.router.navigateByUrl('/orders')});
+                url ='/orders';
             }
-            this.popup.addPopUp(this.alertControl,ok,cancel,title,subTitle,this.router);
+            this.popup.addPopUp(this.alertControl,isError,2,title,subTitle,url,this.router);
           } catch (error) {
           }
     }
     ngOnDestroy(){
         this.meteorSubscription.unsubscribe()
+        this.ordersSubscription.unsubscribe()
     }
 }

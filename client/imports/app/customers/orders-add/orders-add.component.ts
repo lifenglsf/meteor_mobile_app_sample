@@ -7,14 +7,19 @@ import { PopUp } from '../../popup/popup';
 import { AlertController } from 'ionic-angular';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BaseComponnet } from '../../base.component';
+import { TimeFormat } from '../../date.provider/timeformat';
 @Component({
     templateUrl:"./orders-add.component.html",
     selector:"ng-orders-add",
-    providers:[CustomerService,PopUp]
+    providers:[CustomerService,PopUp,TimeFormat]
 })
-export class OrdersAdd implements OnInit,OnDestroy{
+
+export class OrdersAdd extends BaseComponnet implements OnInit,OnDestroy{
     companyList:any;
     orders={};
+    componentModule="orders";
+    componentAction="add";
     private meteorSubscription:Subscription ;
     ngOnInit(){
         this.meteorSubscription = MeteorObservable.subscribe<any>('abc').subscribe(() => {
@@ -22,10 +27,15 @@ export class OrdersAdd implements OnInit,OnDestroy{
         });
        let invoiceConfirm =document.getElementById('fee_invoice_confirm');
        _.set(invoiceConfirm,'disabled',true);
+       this.checkPerm();
     }
-    constructor(public customerService:CustomerService,public popup:PopUp,public alertControl:AlertController,public router:Router){
-
+    constructor(public timeFormt:TimeFormat,public customerService:CustomerService,public popup:PopUp,public alertControl:AlertController,public router:Router){
+        super();
     }
+format(event,type,obj){
+    console.log(obj)
+    return this.timeFormt.format(event,type)
+}
     changeInvoice(event){
         const invoiceConfirm = document.getElementById('fee_invoice_confirm');
         if(event.target.checked){
@@ -36,24 +46,19 @@ export class OrdersAdd implements OnInit,OnDestroy{
     }
     async addOrder(){
         try {
-            console.log(this.orders,'orders form data');
             _.set(this.orders,'manager',Meteor.userId());
             const res = await this.customerService.addOrder(this.orders);
-            console.log(res);
             let title = '添加缴费记录';
             var subTitle = '添加缴费记录成功';
-            var ok = {},cancel={};
+            let isError=false;
+            let url="";
             if(_.has(res,'error')){
                 subTitle = '添加支付记录失败,失败原因:'+_.get(res,'message');
-                ok = undefined;
-                cancel=undefined;
+                isError=true;
             }else{
-                _.set(ok,'text','继续添加');
-                _.set(ok,'callback',function(){location.reload()});
-                _.set(cancel,'text','去列表');
-                _.set(cancel,'callback',function(){console.log(this);this.router.navigateByUrl('/orders')});
+                url='/orders';
             }
-            this.popup.addPopUp(this.alertControl,ok,cancel,title,subTitle,this.router);
+            this.popup.addPopUp(this.alertControl,isError,1,title,subTitle,url,this.router);
           } catch (error) {
           }
     }

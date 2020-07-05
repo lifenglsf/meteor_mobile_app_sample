@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import {  NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModule, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import {IonicModule} from 'ionic-angular';
 import { OrdersAdd } from '../orders-add/orders-add.component';
 import { OrdersListComponent } from '../orders-list/orders-list.component';
 import { OrdersEdit } from '../orders-edit/orders-edit.component';
+import { NgbDateYYYYMMParserFormatter } from '../../date.provider/datetickym.provider';
+import { I18n, DatePickZHCN } from '../../datepick_language/zh';
 const routes: Routes = [
     {
         path: '',
@@ -37,6 +39,7 @@ const routes: Routes = [
     IonicModule
   ],
   declarations: [OrdersAdd,OrdersListComponent,OrdersEdit],
+  providers:[I18n, {provide: NgbDatepickerI18n, useClass: DatePickZHCN}]
 
 })
 export class OrderssPageModule {}

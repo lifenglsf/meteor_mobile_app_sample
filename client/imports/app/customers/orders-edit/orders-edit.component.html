@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>添加缴费记录</ion-title>
+    <ion-title>编辑缴费记录222</ion-title>
   </ion-toolbar>
 </ion-header>
 <form (ngSubmit)="addOrder()" #OrdersAdd="ngForm">
@@ -21,6 +21,16 @@
       <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker"
         class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
     </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">缴费期间</label>
+    <div class="col-sm-10">
+      <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker"
+        class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
+    -  <input required (click)="d.toggle()" type="text" name="fee_date" ngbDatepicker #d="ngbDatepicker"
+    class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
+
+      </div>
   </div>
    <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费金额</label>

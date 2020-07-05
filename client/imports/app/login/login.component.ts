@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController, Button } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { Meteor } from 'meteor/meteor';
 import * as _ from 'lodash';
 import {  Router } from '@angular/router';

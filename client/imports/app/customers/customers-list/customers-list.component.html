@@ -22,8 +22,8 @@
           <td>
             {{country.contact_name}}
           </td>
-          <td>{{ country.contact_phone }}</td>
-          <td><a [routerLink]="['/customers/edit',country._id]">编辑</a>|<a [routerLink]="['/orders',country._id]">缴费记录</a></td>
+          <td>{{ hidePhone(country.contact_phone) }}</td>
+          <td><span *ngIf="user.is_master==1"><a [routerLink]="['/customers/edit',country._id]" >编辑</a>|</span><a [routerLink]="['/orders',country._id]" >缴费记录</a></td>
         </tr>
       </tbody>
     </table>

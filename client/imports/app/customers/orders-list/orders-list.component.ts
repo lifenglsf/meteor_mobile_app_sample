@@ -5,10 +5,11 @@ import { customers } from 'imports/collections/customer';
 import * as _ from 'lodash';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { BaseComponnet } from '../../base.component';
 @Component({
     templateUrl:"./orders-list.component.html"
 })
-export class OrdersListComponent implements OnInit,OnDestroy{
+export class OrdersListComponent extends BaseComponnet implements OnInit,OnDestroy{
     private ordersList;
     private companyList;
     private page = 1;
@@ -16,8 +17,10 @@ export class OrdersListComponent implements OnInit,OnDestroy{
     collectionSize: any;
     private subscription:Subscription
     private osubscription:Subscription
+    componentModule="orders";
+    componentAction="list";
     constructor(public router:Router,public activitedRouter:ActivatedRoute){
-
+        super();
     }
     ngOnInit(): void {
         this.subscription =MeteorObservable.subscribe('abc').subscribe(()=>{

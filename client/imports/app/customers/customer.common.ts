@@ -2,7 +2,7 @@ import { AlertController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 export class CustomerCommon{
-    addCustomerPopup(res,alertController:AlertController,router:Router){
+    addCustomerPopup(res,alertController:AlertController,router:Router,obj){
         let alert;
         if(_.has(res,'error')){
            alert =alertController.create({
@@ -10,7 +10,6 @@ export class CustomerCommon{
             subTitle:_.get(res,'message'),
             buttons:['OK']
           })
-          //this.dialog.open(DialogErrorComponent,{width:"800px",data:{message:_.get(res,'message')}})
         }else{
            alert =alertController.create(
            {
@@ -20,6 +19,7 @@ export class CustomerCommon{
               {
               text:"继续添加",
               handler:()=>{
+                  document.getElementsByTagName("form")[0].reset()
                   //this.customer=null;
               }
             },
@@ -31,7 +31,6 @@ export class CustomerCommon{
             }
           ]
           })
-          //this.dialog.open(DialogSuccessComponent)
         }
         alert.present()
     }

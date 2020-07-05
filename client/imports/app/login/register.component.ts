@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
 import { CustomerService } from 'client/imports/service/customerService';
 import *  as _ from 'lodash';
@@ -23,7 +23,7 @@ export class Register implements OnInit {
                 'username': new FormControl(null, [
                     Validators.required
                 ]),
-                'emails': new FormControl(null, [
+                'email': new FormControl(null, [
                     Validators.required,
                     Validators.email
                 ]),

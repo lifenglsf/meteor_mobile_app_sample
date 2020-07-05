@@ -18,6 +18,10 @@
 .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid, .ng-invalid:not(form){
     border-color: #dc3545;
 }
+:disabled, *[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
 .invalid-feedback {
     display: none;
     width: 100%;

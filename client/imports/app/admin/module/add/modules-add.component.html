@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>添加模块</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="content">
+  <form (ngSubmit)="addModule()" #ModulesAdd="ngForm">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">模块名称</label>
+      <div class="col-sm-10">
+        <input type="text" name="module_name" class="form-control " [(ngModel)]="module.module_name" required id="module_name"
+          #module_name="ngModel">
+        <div [hidden]="module_name.valid || module_name.pristine" class="alert alert-danger">
+          模块名称必填
+        </div>
+      </div>
+    </div>
+
+     <div class="form-group row">
+      <label class="col-form-label col-sm-2">模块代码</label>
+      <div class="col-sm-10">
+        <input type="text" name="module_code" class="form-control " [(ngModel)]="module.module_code" required 
+          #module_code="ngModel">
+        <div [hidden]="module_code.valid || module_code.pristine" class="alert alert-danger">
+          模块代码必填 
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">模块操作</label>
+        <div id="module_action_div" class="col-sm-10">
+          <div class="form-group row" *ngFor="let maction of module.module_action; let i = index;">
+            <div class="col-sm-10">
+              <input type="text" name="module_action_{{i}}" class="form-control " [(ngModel)]="maction.code"
+                >
+              <!-- <div [hidden]="module_action_i.valid || module_action_i.pristine" class="alert alert-danger">
+                模块代码必填 
+              </div> -->
+            </div>
+            <div class="col-sm-2">
+              <button *ngIf="i==0" class="module_action_add" type="button" (click)="addModuleAction()">添加</button>
+              <button *ngIf="i>0" class="module_action_del" type="button" (click)="removeModuleAction(i)">删除</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <ion-input type="text" hidden [(ngModel)]="module._id" name="_id"></ion-input>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary" [disabled]="!ModulesAdd.form.valid">添加模块</button>
+    </div>
+
+  </form>
+</div>
+<script>
+  $(".module_action_add").onclick=function(e){
+    e.preventDefault();
+    console.log("click")
+  }
+</script>
