@@ -3,7 +3,7 @@ import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
     'zh-cn': {
-      weekdays: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+      weekdays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
       months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     }
     // other languages you would support

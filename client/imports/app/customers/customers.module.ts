@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {CustomersAddComponent} from './customers-add/customers-add.component';
 import {CustomersListComponent} from './customers-list/customers-list.component';
 import {  NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import {NgbDateMMDDParserFormatter} from '../date.provider/datetickmd.provider';
 import {IonicModule} from 'ionic-angular';
 import { CustomersEditComponnet } from './customers-edit/customers-edit.component';
 const routes: Routes = [
@@ -33,8 +32,6 @@ const routes: Routes = [
     IonicModule
   ],
   declarations: [CustomersAddComponent,CustomersListComponent,CustomersEditComponnet],
-  providers:[
-    {provide:NgbDateParserFormatter,useClass:NgbDateMMDDParserFormatter}
-  ]
+
 })
 export class CustomersPageModule {}

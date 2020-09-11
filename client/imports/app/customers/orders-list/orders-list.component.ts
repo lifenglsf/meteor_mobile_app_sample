@@ -56,6 +56,28 @@ export class OrdersListComponent extends BaseComponnet implements OnInit,OnDestr
                     }
                    obj.convertFeeDate = obj.fee_date.year+'-'+obj.fee_date.month+'-'+obj.fee_date.day;
                 }
+                let tmpPeriodStart=""
+                let tmpPeriodEnd=""
+                if (_.has(obj, 'start_date')) {
+                    if(obj.start_date.month<10){
+                        obj.start_date.month='0'+obj.start_date.month;
+                    }
+        
+                    tmpPeriodStart = obj.start_date.year+'-'+obj.start_date.month;
+                }
+                obj.convertPeriodDate="-"
+                if (_.has(obj, 'end_date')) {
+                    if(obj.end_date.month<10){
+                        obj.end_date.month='0'+obj.end_date.month;
+                    }
+                    if(obj.end_date.day<10){
+                        obj.end_date.day='0'+obj.end_date.day;
+                    }
+                    tmpPeriodEnd = obj.end_date.year+'-'+obj.end_date.month;
+                }
+                if(tmpPeriodStart!="" && tmpPeriodEnd!=""){
+                    obj.convertPeriodDate=tmpPeriodStart+"至"+tmpPeriodEnd
+                }
                 switch(obj.option){
                     case "1":
                         obj.convertOption = '现金-w';

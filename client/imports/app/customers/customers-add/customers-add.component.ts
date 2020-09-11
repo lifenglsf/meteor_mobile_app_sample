@@ -34,6 +34,7 @@ export class CustomersAddComponent extends BaseComponnet implements OnInit {
     this.checkPerm()
   }
   
+ 
   async addCustomer(){
   try {
       _.set(this.customer,'manager',Meteor.userId());

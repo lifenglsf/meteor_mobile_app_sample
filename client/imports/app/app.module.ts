@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MonthDatePickerModule } from './month-date-picker/month-date-picker.module';
 @NgModule({
   imports: [
     BrowserModule,
@@ -16,6 +17,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
     AppRoutingModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(AppComponent),
+    MonthDatePickerModule,
   ],
   declarations: [
     AppComponent,

@@ -21,7 +21,8 @@ export class BaseComponnet  {
        
     }
     protected checkPerm(){
-        MeteorObservable.subscribe('roleList').subscribe(() => {
+        console.log("perm")
+        /*MeteorObservable.subscribe('roleList').subscribe(() => {
             this.componentRoleList = _.keyBy(roles.find().fetch(),'_id');
          });
          MeteorObservable.subscribe('userList').subscribe(() => {
@@ -38,7 +39,7 @@ export class BaseComponnet  {
              }
              console.log(permedModule);
              console.log(this.componentRoleList)
-        });
+        });*/
     }
     
 }

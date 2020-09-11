@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<form (ngSubmit)="addOrder()" #OrdersAdd="ngForm">
+<form (ngSubmit)="OrdersAdd.form.valid&&addOrder()" #OrdersAdd="ngForm">
   <div class="form-group row">
     <label class="col-form-label col-sm-2">公司</label>
     <div class="col-sm-10">
@@ -18,34 +18,38 @@
   </div>
   <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费日期</label>
-    <div class="col-sm-10"  #order_date>
-      <input required (click)="d1.toggle()"  [positionTarget]="rrrrr"  type="text" name="fee_date" ngbDatepicker #d1="ngbDatepicker"
-        class="form-control" [(ngModel)]="orders.fee_date" dateFormat="mm-dd" autocomplete="off" readonly>
+    <div class="col-sm-10" #order_date>
+      < <input required (click)="d1.toggle()" [positionTarget]="rrrrr" type="text" name="fee_date" ngbDatepicker
+        #d1="ngbDatepicker" class="form-control" [(ngModel)]="orders.fee_date" autocomplete="off"
+        (change)="test($event)">>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费期间</label>
-    <div class="col-sm-10"  #order_period>
-       <input required (click)="d.toggle()"    type="text" name="start_date" ngbDatepicker #d="ngbDatepicker"
-        class=" col-sm-4" [(ngModel)]="orders.start_date" dateFormat="yyyy-mm" autocomplete="off" readonly>
-     -
-     <input required dateFormat="yyyy-mm"  (ngModelChange)="orders.end_date=format($event,3,this)" (click)="d2.toggle()" [dayTemplate]="currentYear"  ngbDatepicker #d2="ngbDatepicker"type="text" name="end_date" class=" col-sm-4" [(ngModel)]="orders.end_date"  autocomplete="off" readonly>
-
-      </div>
-  </div>
-   <div class="form-group row">
-    <label class="col-form-label col-sm-2">缴费金额</label>
     <div class="col-sm-10">
-      <input required  type="number" name="fee_num" 
-        class="form-control" [(ngModel)]="orders.fee_number"  autocomplete="off" min="0" max="999999">
+      <month-date-picker name="start_date" [(ngModel)]="orders.start_date" readonly>
+      </month-date-picker>
+      -
+      <month-date-picker name="end_date" [(ngModel)]="orders.end_date" readonly></month-date-picker>
+
+
     </div>
   </div>
-   <div class="form-group row">
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">缴费金额</label>
+    <div class="col-sm-10">
+      <input required type="number" name="fee_num" class="form-control" [(ngModel)]="orders.fee_number"
+        autocomplete="off" min="0" max="999999">
+    </div>
+  </div>
+  <div class="form-group row">
     <label class="col-form-label col-sm-2">发票</label>
     <div class="col-sm-10">
-      <input ng-true-value="1" ng-false-value="0"  type="checkbox" name="fee_invoice" (change)="changeInvoice($event)"
-        [(ngModel)]="orders.fee_invoice"  autocomplete="off" id="fee_invoice" #fee_invoice="ngModel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input  id="fee_invoice_confirm" type="checkbox" name="fee_invoice_confirm"  [(ngModel)]="orders.fee_invoice_confirm"  autocomplete="off">
+      <input ng-true-value="1" ng-false-value="0" type="checkbox" name="fee_invoice" (change)="changeInvoice($event)"
+        [(ngModel)]="orders.fee_invoice" autocomplete="off" id="fee_invoice"
+        #fee_invoice="ngModel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="fee_invoice_confirm" type="checkbox" name="fee_invoice_confirm"
+        [(ngModel)]="orders.fee_invoice_confirm" autocomplete="off">
     </div>
   </div>
   <div class="form-group row">

@@ -15,6 +15,7 @@ const routes:Routes = [
   { path: 'admin/module',loadChildren: () => import('./admin/module/module.module').then(m => m.ModulePageModule),canActivate: [AuthGuard]},
   { path: 'admin/role',loadChildren: () => import('./admin/role/role.module').then(m => m.RolePageModule),canActivate: [AuthGuard]},
   { path: 'admin/user',loadChildren: () => import('./admin/user/user.module').then(m => m.UserPageModule),canActivate: [AuthGuard]},
+  { path: 'demos',loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)},
 
   {
     path: '',
