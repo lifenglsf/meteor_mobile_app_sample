@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, ModuleWithComponentFactories, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {ControlValueAccessor, NgModel} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CustomerService} from 'client/imports/service/customerService';
 import {customers} from 'imports/collections/customer';
 import {AlertController} from 'ionic-angular';
 import * as _ from 'lodash';
 import {MeteorObservable} from 'meteor-rxjs';
+import * as moment from 'moment';
 import {Subscription} from 'rxjs';
 
 import {BaseComponnet} from '../../base.component';
@@ -18,6 +20,7 @@ import {PopUp} from '../../popup/popup';
 
 export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
   companyList: any;
+  period: any;
   orders = {};
   componentModule = 'orders';
   componentAction = 'add';
@@ -26,7 +29,8 @@ export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
     this.meteorSubscription =
         MeteorObservable.subscribe<any>('abc').subscribe(() => {
           this.companyList =
-              customers.find({}, {fields: {'_id': 1, company: 1}}).fetch();
+              customers.find({}, {fields: {'_id': 1, company: 1, frequency: 1}})
+                  .fetch();
         });
     let invoiceConfirm = document.getElementById('fee_invoice_confirm');
     _.set(invoiceConfirm, 'disabled', true);
@@ -37,8 +41,9 @@ export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
       public alertControl: AlertController, public router: Router) {
     super();
   }
+
   check_valid($event) {
-    console.log($event)
+    console.log($event.target.selectedOptions[0].dataset)
   }
   changeInvoice(event) {
     const invoiceConfirm = document.getElementById('fee_invoice_confirm');
@@ -48,21 +53,38 @@ export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
       _.set(invoiceConfirm, 'disabled', true);
     }
   }
-  test($event) {
-    console.log('changed')
+  fillPeriodEnd($event) {
+    let period = $event.target.selectedOptions[0].dataset.period;
+    this.period = period;
   }
-  valueChange(data) {
-    console.log('aaaaaaa')
+  getPeriod() {
+    let syear = _.get(_.get(this.orders, 'start_date'), 'year')
+    let smonth = _.get(_.get(this.orders, 'start_date'), 'month')
+    let smon = smonth < 10 ? '0' + smonth : smonth;
+    let preDate = syear + '-' + smonth + '-01';
+    let end = moment(preDate).add(this.period - 1, 'months');
+    let year = end.year();
+    let month = end.month();
+    month = month + 1;
+    let m = month < 10 ? '0' + month : '' + month;
+    let endDate = year + '-' + m;
+    console.log(month)
+    _.set(this.orders, 'end_date', endDate);
   }
+
   async addOrder() {
     try {
       _.set(this.orders, 'manager', Meteor.userId());
-      console.log(this.orders)
-      const res = await this.customerService.addOrder(this.orders);
+      this.getPeriod()
+      console.log(this.period, this.orders);
       let title = '添加缴费记录';
       var subTitle = '添加缴费记录成功';
       let isError = false;
       let url = '';
+
+
+      const res = await this.customerService.addOrder(this.orders);
+
       if (_.has(res, 'error')) {
         subTitle = '添加支付记录失败,失败原因:' + _.get(res, 'message');
         isError = true;

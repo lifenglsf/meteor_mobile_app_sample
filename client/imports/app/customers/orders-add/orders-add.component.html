@@ -8,8 +8,11 @@
   <div class="form-group row">
     <label class="col-form-label col-sm-2">公司</label>
     <div class="col-sm-10">
-      <select name="company" [(ngModel)]="orders.company" class="form-control" required id="company" #company="ngModel">
-        <option *ngFor="let item of companyList" value="{{item._id}}">{{item.company}}</option>
+      <select name="company" [(ngModel)]="orders.company" class="form-control" required id="company" #company="ngModel"
+        (change)="fillPeriodEnd($event)">
+        <option *ngFor="let item of companyList" value="{{item._id}}" [attr.data-period]="item.frequency">
+          {{item.company}}
+        </option>
       </select>
       <div [hidden]="company.valid || company.pristine" class="alert alert-danger">
         公司必选
@@ -19,20 +22,16 @@
   <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费日期</label>
     <div class="col-sm-10" #order_date>
-      < <input required (click)="d1.toggle()" [positionTarget]="rrrrr" type="text" name="fee_date" ngbDatepicker
+      <input required (click)="d1.toggle()" [positionTarget]="rrrrr" type="text" name="fee_date" ngbDatepicker
         #d1="ngbDatepicker" class="form-control" [(ngModel)]="orders.fee_date" autocomplete="off"
-        (change)="test($event)">>
+        (change)="test($event)">
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-form-label col-sm-2">缴费期间</label>
+    <label class="col-form-label col-sm-2">缴费开始期间</label>
     <div class="col-sm-10">
-      <month-date-picker name="start_date" [(ngModel)]="orders.start_date" readonly>
+      <month-date-picker name="start_date" [(ngModel)]="orders.start_date" readonly required>
       </month-date-picker>
-      -
-      <month-date-picker name="end_date" [(ngModel)]="orders.end_date" readonly></month-date-picker>
-
-
     </div>
   </div>
   <div class="form-group row">
@@ -70,6 +69,7 @@
   </div>
 
   <ion-input type="text" hidden [(ngModel)]="orders._id" name="_id"></ion-input>
+  <ion-input type="text" hidden [(ngModel)]="period" name="period"></ion-input>
   <div class="form-group row">
     <button type="submit" class="btn btn-primary" [disabled]="!OrdersAdd.form.valid">添加缴费记录</button>
   </div>

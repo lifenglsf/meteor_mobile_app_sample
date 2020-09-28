@@ -77,8 +77,8 @@ export class MonthDatePickerComponent implements ControlValueAccessor,
       this.cd.markForCheck()
     } else {
       const date = new Date()
-      const year = date.getFullYear()
-      const month = date.getMonth()
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
       month < 10 ? '0' + month : '' + month
       const defaultDate = {year: year, month: month};
       this.model = defaultDate ?
@@ -165,6 +165,5 @@ export class MonthDatePickerComponent implements ControlValueAccessor,
     }
     this.onChange(
         this.adapter.toModel({year: this.model.year, month: this.model.month}));
-    this.valueChange.emit(this.model)
   }
 }
