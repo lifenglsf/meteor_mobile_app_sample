@@ -36,7 +36,7 @@
   </table>
   <div class="d-flex justify-content-between p-2">
     <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-      (pageChange)="loadPage($event)">
+      (pageChange)="loadPage($event)" [maxSize]="5" [rotate]="true">
     </ngb-pagination>
 
   </div>

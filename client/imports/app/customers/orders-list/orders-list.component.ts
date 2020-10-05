@@ -14,7 +14,7 @@ export class OrdersListComponent extends BaseComponnet implements OnInit,
   private ordersList;
   private companyList;
   private page = 1;
-  private pageSize = 1;
+  private pageSize = 10;
   collectionSize: any;
   private subscription: Subscription;
   private osubscription: Subscription

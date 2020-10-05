@@ -98,6 +98,9 @@ export class CustomersListComponent extends BaseComponnet implements OnInit {
     this.collectionSize = cusor.count();
   }
   hidePhone(num: string) {
-    return num.substr(0, 3) + '****' + num.substr(7)
+    if(num){
+      return num.substr(0, 3) + '****' + num.substr(7)
+    }
+    return '-';
   }
 }

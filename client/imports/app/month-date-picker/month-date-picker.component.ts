@@ -141,6 +141,7 @@ export class MonthDatePickerComponent implements ControlValueAccessor,
     console.log(year);
     this.model.year = year;
     this.incr = this.getIncr(year);
+    this.propagateModelChange();
   }
   registerOnChange(fn: (value: any) => any): void {
     this.onChange = fn;
