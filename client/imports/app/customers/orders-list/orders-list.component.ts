@@ -75,9 +75,9 @@ export class OrdersListComponent extends BaseComponnet implements OnInit,
           let endDate = _.get(obj, 'end_date');
           if (_.has(endDate, 'year')) {
             let year = _.get(endDate, 'year');
-            let month = _.get(endDate, 'month') + 1;
+            let month = _.get(endDate, 'month');
             let mon = month < 10 ? '0' + month : month;
-            tmpPeriodEnd = year + '-' + month;
+            tmpPeriodEnd = year + '-' + mon;
           } else {
             tmpPeriodEnd = endDate
           }

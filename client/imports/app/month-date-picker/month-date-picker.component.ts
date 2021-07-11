@@ -91,6 +91,7 @@ export class MonthDatePickerComponent implements ControlValueAccessor,
   change(value: string) {
     console.log('change');
     this.propagateModelChange()
+    this.setRelatedValue(value)
   }
 
   selectYearMonth($event, index: number) {
@@ -164,7 +165,12 @@ export class MonthDatePickerComponent implements ControlValueAccessor,
     if (touched) {
       this.onTouched();
     }
+    this.setRelatedValue(this.model);
     this.onChange(
         this.adapter.toModel({year: this.model.year, month: this.model.month}));
+  }
+  setRelatedValue(value){
+    console.log("set relate value")
+    this.valueChange.emit(value);
   }
 }

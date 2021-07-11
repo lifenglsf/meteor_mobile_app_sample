@@ -10,7 +10,7 @@
         <th scope="col">姓名</th>
         <th scope="col">联系人</th>
         <th scope="col">联系方式</th>
-
+        <th scope="col">企业类型</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -29,6 +29,9 @@
           {{country.contact_name}}
         </td>
         <td>{{ hidePhone(country.contact_phone) }}</td>
+        <td>
+          {{country.company_type_name}}
+        </td>
         <td><span *ngIf="user.is_master==1"><a [routerLink]="['/customers/edit',country._id]">编辑</a>|</span><a
             [routerLink]="['/orders',country._id]">缴费记录</a></td>
       </tr>

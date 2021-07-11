@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import {Subscription} from 'rxjs';
 
 import {BaseComponnet} from '../../base.component';
+import { MonthDate } from '../../month-date-picker/month-date';
 import {PopUp} from '../../popup/popup';
 
 @Component({
@@ -21,6 +22,7 @@ import {PopUp} from '../../popup/popup';
 export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
   companyList: any;
   period: any;
+  customerEndDate:any
   orders = {};
   componentModule = 'orders';
   componentAction = 'add';
@@ -56,20 +58,27 @@ export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
   fillPeriodEnd($event) {
     let period = $event.target.selectedOptions[0].dataset.period;
     this.period = period;
+    this.getPeriod();
+    console.log(this.orders);
   }
   getPeriod() {
-    let syear = _.get(_.get(this.orders, 'start_date'), 'year')
-    let smonth = _.get(_.get(this.orders, 'start_date'), 'month')
-    let smon = smonth < 10 ? '0' + smonth : smonth;
-    let preDate = syear + '-' + smonth + '-01';
-    let end = moment(preDate).add(this.period - 1, 'months');
-    let year = end.year();
-    let month = end.month();
-    month = month + 1;
-    let m = month < 10 ? '0' + month : '' + month;
-    let endDate = year + '-' + m;
-    console.log(month)
-    _.set(this.orders, 'end_date', endDate);
+    //if(!_.has(this.orders,'end_date')){
+      if(this.period &&!_.get(this.orders,'custom_end_date')){
+        let syear = _.get(_.get(this.orders, 'start_date'), 'year')
+        let smonth = _.get(_.get(this.orders, 'start_date'), 'month')
+        let smon = smonth < 10 ? '0' + smonth : smonth;
+        let preDate = syear + '-' + smonth + '-01';
+        let end = moment(preDate).add(this.period - 1, 'months');
+        let year = end.year();
+        let month = end.month();
+        month = month + 1;
+        let m = month < 10 ? '0' + month : '' + month;
+        console.log(month)
+        _.set(this.orders, 'end_date', new MonthDate(year,month));
+      }
+      
+    //}
+  
   }
 
   async addOrder() {
@@ -98,5 +107,8 @@ export class OrdersAdd extends BaseComponnet implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.meteorSubscription.unsubscribe()
+  }
+  setValues(event){
+    this.getPeriod();
   }
 }

@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import {Subscription} from 'rxjs';
 
 import {BaseComponnet} from '../../base.component';
+import { MonthDate } from '../../month-date-picker/month-date';
 import {PopUp} from '../../popup/popup';
 
 @Component({
@@ -105,22 +106,28 @@ export class OrdersEdit extends BaseComponnet implements OnInit, OnDestroy {
     this.period = period;
   }
   getPeriod() {
-    let syear = _.get(_.get(this.orders, 'start_date'), 'year')
-    let smonth = _.get(_.get(this.orders, 'start_date'), 'month')
-    let smon = smonth < 10 ? '0' + smonth : smonth;
-    let preDate = syear + '-' + smon + '-01';
-    let end = moment(preDate).add(this.period - 1, 'months');
-    let year = end.year();
-    let month = end.month();
-    month = month + 1;
-    let m = month < 10 ? '0' + month : '' + month;
-    let endDate = year + '-' + m;
-    console.log(month)
-    _.set(this.orders, 'end_date', endDate);
+    if(this.period && !_.get(this.orders,'custom_end_date')){
+      let syear = _.get(_.get(this.orders, 'start_date'), 'year')
+      let smonth = _.get(_.get(this.orders, 'start_date'), 'month')
+      let smon = smonth < 10 ? '0' + smonth : smonth;
+      let preDate = syear + '-' + smon + '-01';
+      let end = moment(preDate).add(this.period - 1, 'months');
+      let year = end.year();
+      let month = end.month();
+      month = month + 1;
+      let m = month < 10 ? '0' + month : '' + month;
+      let endDate = year + '-' + m;
+      console.log(month)
+      _.set(this.orders, 'end_date', new MonthDate(year,month));
+    }
+    
   }
 
   ngOnDestroy() {
     this.meteorSubscription.unsubscribe();
     this.ordersSubscription.unsubscribe()
+  }
+  setValues(event){
+    this.getPeriod();
   }
 }

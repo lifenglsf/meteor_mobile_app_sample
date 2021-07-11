@@ -22,7 +22,7 @@ export class CustomersListComponent extends BaseComponnet implements OnInit {
   customerList: any;
   demo: any;
   page = 1;
-  pageSize = 1;
+  pageSize = 50;
   collectionSize: any;
   user: any;
   protected componentModule = 'customers';
@@ -88,6 +88,12 @@ export class CustomersListComponent extends BaseComponnet implements OnInit {
             obj.isFee = true;
             obj.nextFee = date.year() + '-' + (date.month() + 1);
           }
+        }
+        obj.company_type_name="暂未设置";
+        if(obj.company_type==1){
+          obj.company_type_name="一般纳税人";
+        }else if(obj.company_type==2){
+          obj.company_type_name="小规模纳税人";
         }
         return obj;
       }

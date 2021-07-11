@@ -16,6 +16,17 @@
       </div>
     </div>
 
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2">企业类型</label>
+      <div class="col-sm-10">
+        <select name="company_type" [(ngModel)]="customer.company_type" class="form-control" required>
+          <option value="">请选择频率</option>
+          <option value="1">一般纳税人</option>
+          <option value="2">小规模纳税人</option>
+        </select>
+      </div>
+    </div>
+
      <div class="form-group row">
       <label class="col-form-label col-sm-2">联系人</label>
       <div class="col-sm-10">

@@ -30,10 +30,22 @@
   <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费开始期间</label>
     <div class="col-sm-10">
-      <month-date-picker name="start_date" [(ngModel)]="orders.start_date" readonly required>
+      <month-date-picker name="start_date" [(ngModel)]="orders.start_date" readonly required (valueChange)="setValues($event)">
+      </month-date-picker>
+      
+      <month-date-picker name="end_date" [(ngModel)]="orders.end_date" readonly required id="aaa" >
       </month-date-picker>
     </div>
   </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2">是否自定义缴费结束时间</label>
+    <div class="col-sm-10">
+      <input ng-true-value="1" ng-false-value="0" type="checkbox" name="custom_end_date" 
+      [(ngModel)]="orders.custom_end_date" autocomplete="off" id="custom_end_date"
+      #custom_end_date="ngModel">
+    </div>
+  </div>
+  
   <div class="form-group row">
     <label class="col-form-label col-sm-2">缴费金额</label>
     <div class="col-sm-10">
