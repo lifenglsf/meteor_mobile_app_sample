@@ -27,19 +27,24 @@ export class BaseComponnet {
     MeteorObservable.subscribe('userList').subscribe(() => {
       var componentUserList = _.keyBy(Meteor.users.find().fetch(), '_id');
       var role = _.get(componentUserList[Meteor.userId()], 'role')
-      var permedModule = [];
-      _.each(role, (val) => {
-        console.log(
-            _.get(this.componentRoleList[val], 'module'), 'componentRoleList');
-        permedModule =
-            _.union(permedModule, _.get(this.componentRoleList[val], 'module'));
-      })
-      const actions = this.componentModule + '_' + this.componentAction;
-      if (_.indexOf(permedModule, actions) == -1) {
-        this.router.navigateByUrl('/403')
+      var username = _.get(componentUserList[Meteor.userId()],"username")
+      if (username!="admin"){
+        var permedModule = [];
+        _.each(role, (val) => {
+          console.log(
+              _.get(this.componentRoleList[val], 'module'), 'componentRoleList');
+          permedModule =
+              _.union(permedModule, _.get(this.componentRoleList[val], 'module'));
+        })
+        const actions = this.componentModule + '_' + this.componentAction;
+        if (_.indexOf(permedModule, actions) == -1) {
+          this.router.navigateByUrl('/403')
+        }
+        console.log(permedModule);
+        console.log(this.componentRoleList)
       }
-      console.log(permedModule);
-      console.log(this.componentRoleList)
+   
+      
     });
   }
 }

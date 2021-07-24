@@ -11,7 +11,6 @@ import { PopUp } from 'client/imports/app/popup/popup';
 @Component({
     selector: 'app-roles-module-list',
     templateUrl: 'role-module.component.html',
-    styleUrls: ['../../../../public/scss/bootstrap.scss'],
     providers:[RoleService,CustomerCommon,PopUp]
 
 })

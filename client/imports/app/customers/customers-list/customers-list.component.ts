@@ -12,7 +12,7 @@ import {BaseComponnet} from '../../base.component';
   selector: 'app-customers-list',
   templateUrl: 'customers-list.component.html',
   styleUrls: [
-    'customers-list.component.scss', '../../../../public/scss/bootstrap.scss'
+    'customers-list.component.scss'
   ],
 })
 

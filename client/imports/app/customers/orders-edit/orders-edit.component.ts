@@ -20,7 +20,7 @@ import {PopUp} from '../../popup/popup';
 })
 export class OrdersEdit extends BaseComponnet implements OnInit, OnDestroy {
   companyList: any;
-  orders = {};
+  orders :any;
   period: any;
   componentAction = 'edit';
   componentModule = 'orders';

@@ -6,7 +6,7 @@ import * as _ from 'lodash'
 @Component({
     selector: 'app-modules-list',
     templateUrl: 'modules-list.component.html',
-    styleUrls: ['modules-list.component.scss', '../../../../public/scss/bootstrap.scss'],
+    styleUrls: ['modules-list.component.scss'],
 })
 
 

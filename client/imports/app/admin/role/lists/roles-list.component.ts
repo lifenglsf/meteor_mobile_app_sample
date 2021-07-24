@@ -6,7 +6,7 @@ import { roles } from 'imports/collections/role';
 @Component({
     selector: 'app-roles-list',
     templateUrl: 'roles-list.component.html',
-    styleUrls: ['roles-list.component.scss', '../../../../public/scss/bootstrap.scss'],
+    styleUrls: ['roles-list.component.scss'],
 })
 
 
